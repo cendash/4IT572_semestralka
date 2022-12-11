@@ -1,8 +1,9 @@
 name: Build and tests our eshop
 
 on:   # sekce kdy se ma poustet
-  workflow_dispatch:
-  push:
+  pull_request:
+    branches:
+      main:
 
 jobs:
   Install:
