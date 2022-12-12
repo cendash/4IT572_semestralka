@@ -1,9 +1,9 @@
 name: Build and tests our eshop
 
-on:   # sekce kdy se ma poustet
+on:
   pull_request:
     branches:
-      main:
+      - main
 
 jobs:
   Install:
