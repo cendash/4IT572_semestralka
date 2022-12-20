@@ -27,4 +27,4 @@ jobs:
           echo "${{ secrets.ANSIBLE_VAULT_PASS }}" > ~/.ssh/.ansible_vault_pass
           echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/devops.pem
           chmod 400 ~/.ssh/devops.pem
-          ansible-playbook ansible/ec2_deploy.yml --vault-password-file ~/.ssh/.ansible_vault_pass --user ec2-user --key-file ~/.ssh/devops.pem
+          ansible-playbook ansible/ec2_deploy.yml --vault-password-file ~/.ssh/.ansible_vault_pass --user ec2-user --key-file ~/.ssh/devops.pem 
