@@ -23,6 +23,7 @@ jobs:
       - name: Execute playbook
         run: |
           ANSIBLE_HOST_KEY_CHECKING=False
+          mkdir ~/.ssh
           echo "${{ secrets.ANSIBLE_VAULT_PASS }}" > ~/.ssh/.ansible_vault_pass
           echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/devops.pem
           chmod 400 ~/.ssh/devops.pem
