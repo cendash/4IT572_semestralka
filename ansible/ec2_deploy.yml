@@ -23,7 +23,7 @@
 
     - name: Add instance host to group
       add_host: 
-        hostname: "{{ item.private_ip_address }}"
+        hostname: "{{ item.public_ip }}"
         groupname: launched
       loop: "{{ ec2.instances }}"
 
