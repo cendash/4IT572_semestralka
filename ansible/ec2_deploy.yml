@@ -4,15 +4,17 @@
 
   tasks:
     - name: Launch EC2 Instance
-      ec2:
+      amazon.aws.ec2_instance:
         instance_type: t2.micro
-        image: ami-0b0dcb5067f052a63
+        image: 
+          id: ami-0b0dcb5067f052a63
         region: us-east-1
         key_name: devops
         vpc_subnet_id: subnet-05247750f1887b940
         group: eshop
         count: 1
-        assign_public_ip: yes
+        network:
+          assign_public_ip: yes
         wait: yes
         aws_access_key: "{{ access_key }}"
         aws_secret_key: "{{ secret_access }}"
