@@ -5,6 +5,7 @@ on:
   
 jobs:
   Connect and deploy eshop:
+    runs-on: ubuntu-latest
     steps:
       - name: Code checkout
         uses: actions/checkout@v3
