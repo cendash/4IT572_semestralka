@@ -4,10 +4,9 @@
 
   tasks:
     - name: Launch EC2 Instance
-      amazon.aws.ec2_instance:
+      ec2:
         instance_type: t2.micro
-        image: 
-          id: ami-0b0dcb5067f052a63
+        image: ami-0b0dcb5067f052a63
         region: us-east-1
         key_name: devops
         vpc_subnet_id: subnet-05247750f1887b940
