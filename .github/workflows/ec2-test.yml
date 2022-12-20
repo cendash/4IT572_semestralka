@@ -35,12 +35,11 @@ jobs:
         uses: machulav/ec2-github-runner@v2
         with:
           mode: start
-          github-token: ${{ secrets.AWS_WORKFLOW_TOKEN }}
+          github-token: ${{ secrets.WORKFLOW_TOKEN }}
           ec2-image-id: ami-0b0dcb5067f052a63
           ec2-instance-type: t2.micro
           subnet-id: subnet-05247750f1887b940
           security-group-id: sg-0afb63de08dbe09bc
-          aws-region: ${{ secrets.AWS_REGION }}
 
   do-the-job:
     name: Do the job on the runner
