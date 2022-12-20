@@ -1,7 +1,6 @@
 name: Build and tests our eshop
 
 on:
-  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -102,22 +101,23 @@ jobs:
 
     steps:
       - name: Code checkout
-        uses: actions/checkout@v2.5.0
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.WORKFLOW_TOKEN }}
 
-      - name: Load node modules and build folder
-        uses: actions/cache@v3.0.11
+      - name: Install Python
+        uses: actions/setup-python@v4
         with:
-          path: |
-            ~/.npm
-            ./node_modules
-            ./build
-          key: ${{ runner.os }}--build-${{ github.run_id }}
+          python-version: '3.10'
 
-      - name: Deploy to firebase
-        uses: lowply/deploy-firebase@v0.0.5
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          FIREBASE_PROJECT: casj04-devops
+      - name: Install Ansible
+        run: pip3 install ansible boto boto3
 
+      - name: Execute playbook
+        run: |
+          ANSIBLE_HOST_KEY_CHECKING=False
+          mkdir ~/.ssh
+          echo "${{ secrets.ANSIBLE_VAULT_PASS }}" > ~/.ssh/.ansible_vault_pass
+          echo "${{ secrets.AWS_SSH_PRIVATE_KEY }}" > ~/.ssh/devops.pem
+          chmod 400 ~/.ssh/devops.pem
+          ansible-playbook ansible/ec2_deploy.yml --vault-password-file ~/.ssh/.ansible_vault_pass --user ec2-user --key-file ~/.ssh/devops.pem 

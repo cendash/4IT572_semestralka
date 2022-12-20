@@ -74,17 +74,3 @@
     - wait_for: 
         port: 
           80
-
-- name: Terminate previous EC2 instance
-  hosts: localhost
-  tasks:
-  - name: Get parameters about an instance
-    amazon.aws.ec2_instance:
-      region: us-east-1
-      access_key: "{{ access_key }}"
-      secret_key: "{{ secret_access }}"
-      session_token: "{{ session_token }}"
-      filters:
-        "tag:Name": "Eshop"
-      exact_count: 2
-      wait: yes
