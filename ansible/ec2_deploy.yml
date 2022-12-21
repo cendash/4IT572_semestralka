@@ -23,14 +23,14 @@
 
     - name: Add instance host to group
       add_host: 
-        hostname: "{{ item.public_ip }}"
+        hostname: "{{ item.public_ip_address }}"
         groupname: launched
       loop: "{{ ec2.instances }}"
 
     - name: Wait for SSH connection
       delegate_to: "{{ item.public_dns_name }}"
       wait_for_connection: 
-        delay: 30
+        delay: 100
         timeout: 300
       loop: "{{ ec2.instances }}"
 
